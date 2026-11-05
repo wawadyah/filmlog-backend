@@ -1,0 +1,44 @@
+{
+  "name": "filmlog-backend",
+  "version": "1.0.0",
+  "description": "RESTful Movie Watchlist API with Gemini AI Recommendation for GDGoC Recruitment Task",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev --name init",
+    "prisma:studio": "prisma studio",
+    "db:seed": "node prisma/seed.js",
+    "db:setup": "npx prisma db push && node prisma/seed.js",
+    "test": "node scripts/test-endpoints.js"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
+  "keywords": [
+    "express",
+    "sqlite",
+    "prisma",
+    "gemini-api",
+    "gdgoc",
+    "watchlist",
+    "rest-api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/genai": "^2.32.0",
+    "@prisma/client": "^6.4.0",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "prisma": "^6.4.0"
+  }
+}

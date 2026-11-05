@@ -1,0 +1,69 @@
+// Prisma Schema for FilmLog (Movie Watchlist API)
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int         @id @default(autoincrement())
+  email     String      @unique
+  username  String
+  password  String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  watchlist Watchlist[]
+  reviews   Review[]
+
+  @@map("users")
+}
+
+model Movie {
+  id          Int         @id
+  title       String
+  year        Int
+  director    String
+  genres      String      // Comma-separated or JSON
+  rating      Float
+  duration    String
+  synopsis    String
+  poster_url  String
+  cast        String      // Comma-separated cast members
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  watchlist   Watchlist[]
+  reviews     Review[]
+
+  @@map("movies")
+}
+
+model Watchlist {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  movieId   Int
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  movie Movie @relation(fields: [movieId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, movieId], name: "user_movie_unique")
+  @@map("watchlists")
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  movieId   Int
+  rating    Float
+  review    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  movie Movie @relation(fields: [movieId], references: [id], onDelete: Cascade)
+
+  @@map("reviews")
+}

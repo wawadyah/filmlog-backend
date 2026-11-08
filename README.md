@@ -1,4 +1,4 @@
-# 🎬 FilmLog — Movie Watchlist & Review Platform (RESTful API & Web)
+# FilmLog — Movie Watchlist & Review Platform (RESTful API & Web)
 
 [![Vercel Deployment](https://img.shields.io/badge/Deployment-Vercel%20Live-brightgreen?style=flat&logo=vercel)](https://filmlog-backend.vercel.app)
 [![Node.js Version](https://img.shields.io/badge/Node.js-v20%2B%20%7C%20v22%2B-339933?style=flat&logo=nodedotjs)](https://nodejs.org)
@@ -7,13 +7,13 @@
 [![SQLite](https://img.shields.io/badge/Database-SQLite-003B57?style=flat&logo=sqlite)](https://www.sqlite.org)
 [![Google Gemini API](https://img.shields.io/badge/AI%20Model-Gemini%20Flash-4285F4?style=flat&logo=googlegemini)](https://aistudio.google.com)
 
-> 🚀 **Live Demo & API URL:** [https://filmlog-backend.vercel.app](https://filmlog-backend.vercel.app)
+>  **Live Demo & API URL:** [https://filmlog-backend.vercel.app](https://filmlog-backend.vercel.app)
 
 ---
 
 ## 📖 Tentang Penugasan (Project Context)
 
-Repositori ini dibangun sebagai pemenuhan **Technical Assignment Google Developer Groups on Campus (GDGoC) — Hacker Track (Back-End Developer)**.
+Repositori ini dibangun sebagai pemenuhan **Technical Assignment Google Developer Groups on Campus (GDGoC) - Hacker Track (Back-End Developer)**.
 
 Aplikasi **FilmLog** adalah platform pelacak dan peninjau film (*movie watchlist & review platform*) yang terinspirasi dari **Letterboxd** dan **IMDb**. Platform ini memungkinkan pengguna untuk:
 1. **Discover:** Menjelajahi katalog 20 film kurasi awal dengan atribut sinematik lengkap (sutradara, sinopsis, cast, poster, rating).
@@ -26,7 +26,7 @@ Aplikasi ini bersifat **Full-Stack Ready**: server backend secara otomatis melay
 
 ---
 
-## 🛠️ Ringkasan Tech Stack & Alasan Pemilihan
+## Ringkasan Tech Stack & Alasan Pemilihan
 
 | Layer | Teknologi | Peran & Alasan Pemilihan |
 | :--- | :--- | :--- |
@@ -41,7 +41,7 @@ Aplikasi ini bersifat **Full-Stack Ready**: server backend secara otomatis melay
 
 ---
 
-## 🚀 Panduan Menjalankan di Localhost (Local Setup Guide)
+##  Panduan Menjalankan di Localhost (Local Setup Guide)
 
 Bagi siapa pun (termasuk reviewer atau pengembang lain) yang ingin meng-clone dan menjalankan aplikasi ini secara lokal di komputer masing-masing, ikuti langkah mudah berikut:
 
@@ -77,7 +77,7 @@ JWT_SECRET="gdgoc_filmlog_super_secret_jwt_key_2026"
 JWT_EXPIRES_IN="7d"
 GEMINI_API_KEY="MASUKKAN_GEMINI_API_KEY_ANDA_DISINI"
 ```
-> 💡 **Mendapatkan Gemini API Key:** Anda bisa mendapatkan API Key gratis dalam 1 menit di **[Google AI Studio](https://aistudio.google.com)**.
+>  **Mendapatkan Gemini API Key:** Anda bisa mendapatkan API Key gratis dalam 1 menit di **[Google AI Studio](https://aistudio.google.com)**.
 
 ### 5. Setup Database & Seeding (20 Film Awal)
 Jalankan perintah ini untuk menyinkronkan skema database SQLite dan mengimpor 20 film kurasi awal:
@@ -92,7 +92,7 @@ npm run dev
 ```
 
 Server backend dan frontend visual sekarang aktif di:
-👉 **`http://localhost:8000`**
+ **`http://localhost:8000`**
 
 Buka tautan di atas di browser Anda. Anda akan langsung melihat antarmuka web FilmLog siap pakai!
 
@@ -174,16 +174,16 @@ Semua rute API dapat diakses melalui awalan `/api`.
 | **Auth** | `POST` | `/api/auth/login` | Otentikasi user & mengembalikan Bearer Token JWT | Publik |
 | **Movies** | `GET` | `/api/movies` | Katalog film (support `?genre=...`, `?search=...`, `?shuffle=true`) | Publik |
 | **Movies** | `GET` | `/api/movies/:id` | Mengambil detail lengkap 1 film berdasarkan ID | Publik |
-| **Watchlist** | `GET` | `/api/watchlist` | Mengambil daftar film watchlist user yang sedang login | 🔒 Bearer Token |
-| **Watchlist** | `POST` | `/api/watchlist` | Menambahkan film ke watchlist (`{ movieId: 1 }`) | 🔒 Bearer Token |
-| **Watchlist** | `DELETE`| `/api/watchlist/:movieId` | Menghapus film dari watchlist user | 🔒 Bearer Token |
-| **Watched** | `GET` | `/api/watched` | Riwayat tontonan dan ulasan dari user yang login | 🔒 Bearer Token |
-| **Watched** | `POST` | `/api/watched` | Log film yang ditonton (`{ movieId, rating, review }`) | 🔒 Bearer Token |
+| **Watchlist** | `GET` | `/api/watchlist` | Mengambil daftar film watchlist user yang sedang login | Bearer Token |
+| **Watchlist** | `POST` | `/api/watchlist` | Menambahkan film ke watchlist (`{ movieId: 1 }`) | Bearer Token |
+| **Watchlist** | `DELETE`| `/api/watchlist/:movieId` | Menghapus film dari watchlist user | Bearer Token |
+| **Watched** | `GET` | `/api/watched` | Riwayat tontonan dan ulasan dari user yang login | Bearer Token |
+| **Watched** | `POST` | `/api/watched` | Log film yang ditonton (`{ movieId, rating, review }`) | Bearer Token |
 | **AI** | `POST` | `/api/movies/recommend` | Rekomendasi film Gemini berbasis 20 film lokal | Publik |
 
 ---
 
-## 🤖 Strategi Gemini AI Prompt Grounding
+## Strategi Gemini AI Prompt Grounding
 
 Untuk menjamin model bahasa (LLM) **tidak berhalusinasi** dan **hanya merekomendasikan film yang benar-benar ada di database lokal**:
 1. **Dynamic Data Retrieval:** Backend mengekstrak ringkasan 20 film lokal (`id`, `title`, `year`, `genres`, `director`, `rating`, `synopsis`) langsung dari SQLite.
@@ -193,7 +193,7 @@ Untuk menjamin model bahasa (LLM) **tidak berhalusinasi** dan **hanya merekomend
 
 ---
 
-## 🔒 Keamanan & Penanganan Error Semantik
+## Keamanan & Penanganan Error Semantik
 
 Sistem mengembalikan kode status HTTP semantik standar RESTful API:
 - `200 OK`: Permintaan berhasil diproses.
@@ -242,7 +242,7 @@ filmlog-backend/
 
 ---
 
-## 📦 Tautan Pengumpulan (Deliverables)
+## Tautan Pengumpulan (Deliverables)
 
 | Komponen | Tautan / Berkas |
 | :--- | :--- |

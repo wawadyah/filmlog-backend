@@ -11,7 +11,7 @@
 
 ---
 
-## 📖 Tentang Penugasan (Project Context)
+## Tentang Penugasan (Project Context)
 
 Repositori ini dibangun sebagai pemenuhan **Technical Assignment Google Developer Groups on Campus (GDGoC) - Hacker Track (Back-End Developer)**.
 
@@ -105,7 +105,7 @@ npm test
 
 ---
 
-## 🗄️ Database Architecture & ERD
+## Database Architecture & ERD
 
 Sistem dimodelkan dalam 4 entitas relasional utama yang saling terhubung dengan integritas data referensial:
 
@@ -164,7 +164,7 @@ erDiagram
 
 ---
 
-## 📑 Dokumentasi Endpoint REST API (API Contract)
+## Dokumentasi Endpoint REST API (API Contract)
 
 Semua rute API dapat diakses melalui awalan `/api`.
 
@@ -206,7 +206,7 @@ Sistem mengembalikan kode status HTTP semantik standar RESTful API:
 
 ---
 
-## 📁 Struktur Repositori
+## Struktur Repositori
 
 ```text
 filmlog-backend/

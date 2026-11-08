@@ -1,0 +1,236 @@
+{
+  "info": {
+    "_postman_id": "filmlog-api-gdgoc-2026",
+    "name": "FilmLog RESTful API — GDGoC Recruitment",
+    "description": "Comprehensive Postman collection for FilmLog Movie Watchlist API with JWT Auth and Gemini AI Grounded Recommendation.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000/api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Authentication",
+      "item": [
+        {
+          "name": "Register New User",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"wawaDyah\",\n  \"email\": \"wawa@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();",
+                  "if (response.token) {",
+                  "    pm.collectionVariables.set('token', response.token);",
+                  "    console.log('Saved JWT Token to collection variables!');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"wawa@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Movies (Discover)",
+      "item": [
+        {
+          "name": "Get All Movies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/movies",
+              "host": ["{{baseUrl}}"],
+              "path": ["movies"]
+            }
+          }
+        },
+        {
+          "name": "Search & Filter Movies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/movies?genre=Sci-Fi&search=Inception",
+              "host": ["{{baseUrl}}"],
+              "path": ["movies"],
+              "query": [
+                { "key": "genre", "value": "Sci-Fi" },
+                { "key": "search", "value": "Inception" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Movie Detail by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/movies/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["movies", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Watchlist (Protected)",
+      "item": [
+        {
+          "name": "Get User Watchlist",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/watchlist",
+              "host": ["{{baseUrl}}"],
+              "path": ["watchlist"]
+            }
+          }
+        },
+        {
+          "name": "Add Movie to Watchlist",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"movieId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/watchlist",
+              "host": ["{{baseUrl}}"],
+              "path": ["watchlist"]
+            }
+          }
+        },
+        {
+          "name": "Delete Movie from Watchlist",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/watchlist/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["watchlist", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Watched & Reviews (Protected)",
+      "item": [
+        {
+          "name": "Get Watched History & Reviews",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/watched",
+              "host": ["{{baseUrl}}"],
+              "path": ["watched"]
+            }
+          }
+        },
+        {
+          "name": "Log Watched Movie with Review",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"movieId\": 1,\n  \"rating\": 5,\n  \"review\": \"Karya sinematik luar biasa dengan konsep mimpi berlapis yang memukau!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/watched",
+              "host": ["{{baseUrl}}"],
+              "path": ["watched"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. AI Recommendation (Gemini Grounded)",
+      "item": [
+        {
+          "name": "Ask Gemini AI Recommendation",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": \"Saya ingin menonton film sci-fi psikologis tentang penjelajahan alam bawah sadar dan realitas mimpi\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/movies/recommend",
+              "host": ["{{baseUrl}}"],
+              "path": ["movies", "recommend"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
